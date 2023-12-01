@@ -41,21 +41,22 @@
 .display {
     display: flex;
     justify-content: flex-end;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .display + div button{
     background: transparent;
     width: 60px;
     height : 40px;
-    font-size: 15px
+    font-size: 15px;
+    padding-top: 5px;
 }
 
 .display input {
     border: 0;
     outline: 0;
     width: 90px;
-    height : 60px;
+    height : 40px;
     border-radius: 5px;
     background: rgb(44, 44, 44);
     font-size: 20px;
@@ -67,6 +68,14 @@
     font-size: 45px;
     box-shadow: none;
     background: transparent;
+}
+
+input.small {
+    height : 10px;
+    font-size: 10px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-weight: lighter;
 }
 
 .calculator .darker {
