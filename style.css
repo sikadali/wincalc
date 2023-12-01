@@ -17,7 +17,7 @@
 .calculator {
     background: black; 
     padding: 20px; 
-    border-radius: 10px;
+    border-radius: 3px;
 }
 
 .row {
@@ -26,7 +26,7 @@
 }
 
 
-.calculator input {
+.calculator button {
     border: 0;
     outline: 0;
     width: 90px;
@@ -38,7 +38,7 @@
     margin: 1px;
 }
 
-.display + div input{
+.display + div button{
     background: transparent;
     width: 60px;
     height : 40px;
@@ -52,6 +52,16 @@
 }
 
 .display input {
+    border: 0;
+    outline: 0;
+    width: 90px;
+    height : 60px;
+    border-radius: 5px;
+    background: rgb(44, 44, 44);
+    font-size: 20px;
+    color: #fff;
+    margin: 1px;
+    
     text-align: right;
     flex: 1;
     font-size: 45px;
