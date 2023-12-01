@@ -8,7 +8,7 @@
 .container {
     width: 100%;
     height: 100vh;
-    background: var(--color-container-bg); 
+    background: linear-gradient(45deg, var(--color-container-bg-grad), var(--color-container-bg)); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,6 +70,10 @@
     background: transparent;
 }
 
+input::placeholder {
+    color: var(--color-calc-font);
+}
+
 input.small {
     height : 10px;
     font-size: 10px;
@@ -78,7 +82,7 @@ input.small {
     font-weight: lighter;
 }
 
-.calculator .darker {
+.calculator .operator {
     background: var(--color-calc-btn-bg-darker);
 }
 .calculator .equal {
@@ -89,7 +93,7 @@ input.small {
 .calculator button:hover {
     background: var(--color-calc-btn-bg-darker);
 }
-.calculator .darker:hover {
+.calculator .operator:hover {
     background: var(--color-calc-btn-bg);
 }
 .calculator .equal:hover {
@@ -102,6 +106,7 @@ input.small {
 /* ===== VARIABLES ======== */
 :root {
     --color-container-bg: black;
+    --color-container-bg-grad: #4cc3fe;
     --color-calc-bg: #212021;
     --color-calc-btn-bg: #3a3a3b;
     --color-calc-font: #fff;
