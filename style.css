@@ -8,14 +8,15 @@
 .container {
     width: 100%;
     height: 100vh;
-    background: rgb(0, 0, 0); 
+    background: var(--color-container-bg); 
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .calculator {
-    background: #212021; 
+    background: var(--color-calc-bg); 
     padding: 5px; 
     border-radius: 3px;
 }
@@ -32,9 +33,9 @@
     width: 90px;
     height : 60px;
     border-radius: 5px;
-    background: #3a3a3b;
+    background: var(--color-calc-btn-bg);
     font-size: 18px;
-    color: #fff;
+    color: var(--color-calc-font);
     margin: 1px;
 }
 
@@ -58,9 +59,8 @@
     width: 90px;
     height : 40px;
     border-radius: 5px;
-    background: rgb(44, 44, 44);
     font-size: 20px;
-    color: #fff;
+    color: var(--color-calc-font);
     margin: 1px;
     
     text-align: right;
@@ -79,20 +79,47 @@ input.small {
 }
 
 .calculator .darker {
-    background: #323232;
+    background: var(--color-calc-btn-bg-darker);
 }
 .calculator .equal {
-    background: #4cc3fe;
+    background: var(--color-calc-btn-equal-bg);
     color: black;
 }
 
 .calculator button:hover {
-    background: #323232;
+    background: var(--color-calc-btn-bg-darker);
 }
 .calculator .darker:hover {
-    background: #3a3a3b;
+    background: var(--color-calc-btn-bg);
 }
 .calculator .equal:hover {
-    background: #49b1e9;
-    color: black;
+    background: var(--color-calc-btn-equal-bg-hover);
+}
+
+
+
+
+/* ===== VARIABLES ======== */
+:root {
+    --color-container-bg: black;
+    --color-calc-bg: #212021;
+    --color-calc-btn-bg: #3a3a3b;
+    --color-calc-font: #fff;
+    --color-calc-btn-bg-darker: #323232;
+    --color-calc-btn-equal-bg: #4cc3fe;
+    --color-calc-btn-equal-bg-hover: #49b1e9;
+}
+
+
+/* ===== DARK MODE ======== */
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-container-bg: white;
+        --color-calc-bg: #f2f3f2;
+        --color-calc-btn-bg: #ffffff;
+        --color-calc-font: #010100;
+        --color-calc-btn-bg-darker: #f9f9f9;
+        --color-calc-btn-equal-bg: #49b1e9;
+        --color-calc-btn-equal-bg-hover: #4cc3fe;
+    }
 }
