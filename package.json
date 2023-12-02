@@ -1,0 +1,21 @@
+{
+  "name": "wincalc",
+  "version": "1.0.0",
+  "description": "HTML/CSS project to mimic Windows 11 Calculator",
+  "main": "script.js",
+  "scripts": {
+    "test": "mocha calculatorTests"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0"
+  },
+  "dependencies": {
+    "jsdom": "^23.0.1",
+    "save-dev": "^0.0.1-security"
+  }
+}
