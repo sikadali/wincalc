@@ -15,7 +15,7 @@ const html = fs.readFileSync(path.resolve(__dirname, "../index.html"), "utf8");
 let dom;
 function waitForDom() {
      return new Promise((resolve) => {
-          dom = new JSDOM.fromFile(html, {
+          dom = new JSDOM(html, {
                runScripts: "dangerously",
                resources: "usable",
                url: `file://${path.resolve(__dirname, "..")}/index.html`,
