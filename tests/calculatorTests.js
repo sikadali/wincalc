@@ -13,18 +13,6 @@ const __dirname = path.dirname(__filename);
 const html = fs.readFileSync(path.resolve(__dirname, "../index.html"), "utf8");
 
 let dom;
-function waitForDom() {
-     return new Promise((resolve) => {
-          dom = new JSDOM(html, {
-               runScripts: "dangerously",
-               resources: "usable",
-               url: `file://${path.resolve(__dirname, "..")}/index.html`,
-          });
-          dom.window.document.addEventListener("DOMContentLoaded", () => {
-               resolve();
-          });
-     });
-}
 
 before(() => waitForDom());
 
@@ -32,6 +20,10 @@ beforeEach(function () {
      global.window = dom.window;
      global.document = dom.window.document;
      global.display = document.getElementById("display");
+});
+
+afterEach(function () {
+     global.display.value = "";
 });
 
 describe("Screen displaying digits", function () {
@@ -47,10 +39,6 @@ describe("Screen displaying digits", function () {
           { it: "8", option: "8" },
           { it: "9", option: "9" },
      ];
-
-     afterEach(function () {
-          global.display.value = "";
-     });
 
      runs.forEach((run) => {
           it(
@@ -86,24 +74,45 @@ describe("Screen displaying digits", function () {
           let digit = document.getElementById("9");
 
           // act
-          digit.click();
-          digit.click();
+          multipleClicks(digit, 2);
 
           // assert
           expect(display.value).to.equal("99");
      });
+});
 
-     it("display 9 999 when clicking four times on the digit 9", function () {
+describe("Space for big numbers", function () {
+     it("display 9 999 when clicking 4 times on the digit 9", function () {
           // arrange
           let digit = document.getElementById("9");
 
           // act
-          for (let i = 0; i < 4; i++) {
-               digit.click();
-          }
+          multipleClicks(digit, 4);
 
           // assert
           expect(display.value).to.equal("9 999");
+     });
+
+     it("display 99 999 when clicking 5 times on the digit 9", function () {
+          // arrange
+          let digit = document.getElementById("9");
+
+          // act
+          multipleClicks(digit, 5);
+
+          // assert
+          expect(display.value).to.equal("99 999");
+     });
+
+     it("display 999 999 when clicking 6 times on the digit 9", function () {
+          // arrange
+          let digit = document.getElementById("9");
+
+          // act
+          multipleClicks(digit, 6);
+
+          // assert
+          expect(display.value).to.equal("999 999");
      });
 });
 
@@ -117,3 +126,22 @@ describe("Screen displaying digits", function () {
           // assert
      });
 });*/
+
+function waitForDom() {
+     return new Promise((resolve) => {
+          dom = new JSDOM(html, {
+               runScripts: "dangerously",
+               resources: "usable",
+               url: `file://${path.resolve(__dirname, "..")}/index.html`,
+          });
+          dom.window.document.addEventListener("DOMContentLoaded", () => {
+               resolve();
+          });
+     });
+}
+
+function multipleClicks(digit, times) {
+     for (let i = 0; i < times; i++) {
+          digit.click();
+     }
+}

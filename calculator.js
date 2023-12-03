@@ -12,7 +12,7 @@ let arr = Array.from(buttons);
 arr.forEach((button) => {
      button.addEventListener("click", (e) => {
           if (e.target.innerHTML == EQUAL) {
-               input.value = eval(input.value.replace(SPACE_REGEX, ""));
+               input.value = eval(removeSpaceChar(input.value));
           } else if (e.target.innerHTML == CLEAR) {
                input.value = EMPTY_CHAR;
           } else if (e.target.className == "operator bi bi-backspace") {
@@ -21,6 +21,11 @@ arr.forEach((button) => {
                input.value += e.target.innerHTML;
                if (input.value.length == 4) {
                     input.value = insertSpaceCharAtIndex(input.value, 1);
+               } else if (input.value.length == 6) {
+                    input.value = insertSpaceCharAtIndex(
+                         removeSpaceCharFromInput(),
+                         2
+                    );
                }
           }
      });
@@ -28,4 +33,8 @@ arr.forEach((button) => {
 
 function insertSpaceCharAtIndex(str, index) {
      return str.substring(0, index) + SPACE_CHAR + str.substring(index);
+}
+
+function removeSpaceCharFromInput() {
+     return input.value.replace(SPACE_REGEX, "");
 }
