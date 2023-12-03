@@ -11,7 +11,7 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/calculatorTests"
+                "${workspaceFolder}/tests/calculatorTests"
             ],
             "internalConsoleOptions": "openOnSessionStart",
             "name": "Mocha Tests",
@@ -29,7 +29,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\calculatorTests.js"
+            "program": "${workspaceFolder}\\tests/calculatorTests.js"
         }
     ]
 }
