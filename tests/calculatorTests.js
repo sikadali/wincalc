@@ -28,6 +28,12 @@ function waitForDom() {
 
 before(() => waitForDom());
 
+beforeEach(function () {
+     global.window = dom.window;
+     global.document = dom.window.document;
+     global.display = document.getElementById("display");
+});
+
 describe("Screen displaying digits", function () {
      var runs = [
           { it: "0", option: "0" },
@@ -42,17 +48,11 @@ describe("Screen displaying digits", function () {
           { it: "9", option: "9" },
      ];
 
-     beforeEach(function () {
-          global.window = dom.window;
-          global.document = dom.window.document;
-          global.display = document.getElementById("display");
-     });
-
      afterEach(function () {
           global.display.value = "";
      });
 
-     runs.forEach(function (run) {
+     runs.forEach((run) => {
           it(
                "display " + run.it + " when clicking on the digit " + run.it,
                function () {
@@ -92,4 +92,28 @@ describe("Screen displaying digits", function () {
           // assert
           expect(display.value).to.equal("99");
      });
+
+     it("display 9 999 when clicking four times on the digit 9", function () {
+          // arrange
+          let digit = document.getElementById("9");
+
+          // act
+          for (let i = 0; i < 4; i++) {
+               digit.click();
+          }
+
+          // assert
+          expect(display.value).to.equal("9 999");
+     });
 });
+
+/*describe("Negate operation", () => {
+     it("displayed positive number turns negative when clicking on negate button", () => {
+          // arrange
+          let negate = document.getElementById("negative");
+
+          // act
+
+          // assert
+     });
+});*/

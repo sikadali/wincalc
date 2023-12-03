@@ -1,11 +1,13 @@
 let input = document.getElementById("display");
 let buttons = document.querySelectorAll("button");
 
+const SPACE_REGEX = / /g;
+
 let arr = Array.from(buttons);
 arr.forEach((button) => {
      button.addEventListener("click", (e) => {
           if (e.target.innerHTML == "=") {
-               input.value = eval(input.value);
+               input.value = eval(input.value.replace(SPACE_REGEX, ""));
           } else if (e.target.innerHTML == "C") {
                input.value = "";
           } else if (e.target.className == "operator bi bi-backspace") {
