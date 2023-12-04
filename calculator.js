@@ -19,23 +19,25 @@ arr.forEach((button) => {
                input.value = input.value.substring(0, string.length - 1);
           } else {
                input.value += e.target.innerHTML;
-               // return a new array of strings
-               const arrayStrings = removeSpaceCharFromInput().split("");
-               // reverse the new created array elements
-               const reversingArray = arrayStrings.reverse();
-
-               let result = "";
-               for (let i = 0; i < reversingArray.length; i++) {
-                    result = reversingArray[i] + result;
-                    if ((i + 1) % 3 == 0 && i != reversingArray.length - 1) {
-                         result = SPACE_CHAR + result;
-                    }
-               }
-
-               input.value = result;
+               spacingInputValue();
           }
      });
 });
+
+function spacingInputValue() {
+     const arrayStrings = removeSpaceCharFromInput().split("");
+     const reversingArray = arrayStrings.reverse();
+
+     let result = "";
+     for (let i = 0; i < reversingArray.length; i++) {
+          result = reversingArray[i] + result;
+          if ((i + 1) % 3 == 0 && i != reversingArray.length - 1) {
+               result = SPACE_CHAR + result;
+          }
+     }
+
+     input.value = result;
+}
 
 function removeSpaceCharFromInput() {
      return input.value.replace(SPACE_REGEX, "");
