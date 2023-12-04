@@ -7,18 +7,22 @@ const EMPTY_CHAR = "";
 const EQUAL = "=";
 const CLEAR = "C";
 const CLEAR_ENTRY = "CE";
+const NEGATIVE_CLASS = "negative";
 
 let arr = Array.from(buttons);
+
 arr.forEach((button) => {
      button.addEventListener("click", (e) => {
-          if (e.target.innerHTML == EQUAL) {
+          const innerHTML = e.target.innerHTML;
+          if (innerHTML == EQUAL) {
                input.value = eval(removeSpaceChar(input.value));
-          } else if (e.target.innerHTML == CLEAR) {
+          } else if (e.target.className == NEGATIVE_CLASS) {
+          } else if (innerHTML == CLEAR) {
                input.value = EMPTY_CHAR;
           } else if (e.target.className == "operator bi bi-backspace") {
                input.value = input.value.substring(0, string.length - 1);
           } else {
-               input.value += e.target.innerHTML;
+               input.value += innerHTML;
                spacingInputValue();
           }
      });

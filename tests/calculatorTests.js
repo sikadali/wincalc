@@ -164,7 +164,7 @@ describe("Space for big numbers", function () {
 describe("Negate operation", () => {
      it("does nothing when clicking on negate button while no number inputed", () => {
           // arrange
-          let negate = document.getElementById("negative");
+          let negate = document.querySelector(".row .negative");
 
           // act
           negate.click();
@@ -175,7 +175,7 @@ describe("Negate operation", () => {
 
      it("does nothing when clicking on negate button while 0 in input", () => {
           // arrange
-          let negate = document.getElementById("negative");
+          let negate = document.querySelector(".row .negative");
 
           // act
           negate.click();
@@ -186,7 +186,7 @@ describe("Negate operation", () => {
 
      it("1 turns -1 when clicking on negate button", () => {
           // arrange
-          let negate = document.getElementById("negative");
+          let negate = document.querySelector(".row .negative");
           let digit1 = document.getElementById("1");
 
           // act
