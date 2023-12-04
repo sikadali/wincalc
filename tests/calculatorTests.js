@@ -114,6 +114,28 @@ describe("Space for big numbers", function () {
           // assert
           expect(display.value).to.equal("999 999");
      });
+
+     it("display 9 999 999 when clicking 7 times on the digit 9", function () {
+          // arrange
+          let digit = document.getElementById("9");
+
+          // act
+          multipleClicks(digit, 7);
+
+          // assert
+          expect(display.value).to.equal("9 999 999");
+     });
+
+     it("display 9 999 999 999 999 999 when clicking 16 times on the digit 9", function () {
+          // arrange
+          let digit = document.getElementById("9");
+
+          // act
+          multipleClicks(digit, 16);
+
+          // assert
+          expect(display.value).to.equal("9 999 999 999 999 999");
+     });
 });
 
 /*describe("Negate operation", () => {

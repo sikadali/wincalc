@@ -19,21 +19,23 @@ arr.forEach((button) => {
                input.value = input.value.substring(0, string.length - 1);
           } else {
                input.value += e.target.innerHTML;
-               if (input.value.length == 4) {
-                    input.value = insertSpaceCharAtIndex(input.value, 1);
-               } else if (input.value.length == 6) {
-                    input.value = insertSpaceCharAtIndex(
-                         removeSpaceCharFromInput(),
-                         2
-                    );
+               // return a new array of strings
+               const arrayStrings = removeSpaceCharFromInput().split("");
+               // reverse the new created array elements
+               const reversingArray = arrayStrings.reverse();
+
+               let result = "";
+               for (let i = 0; i < reversingArray.length; i++) {
+                    result = reversingArray[i] + result;
+                    if ((i + 1) % 3 == 0 && i != reversingArray.length - 1) {
+                         result = SPACE_CHAR + result;
+                    }
                }
+
+               input.value = result;
           }
      });
 });
-
-function insertSpaceCharAtIndex(str, index) {
-     return str.substring(0, index) + SPACE_CHAR + str.substring(index);
-}
 
 function removeSpaceCharFromInput() {
      return input.value.replace(SPACE_REGEX, "");
