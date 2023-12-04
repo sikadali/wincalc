@@ -1,5 +1,5 @@
 import { describe, it, beforeEach, before, afterEach } from "mocha";
-import { expect, assert } from "chai";
+import { expect } from "chai";
 import { JSDOM } from "jsdom";
 
 import fs from "fs";
@@ -28,7 +28,6 @@ afterEach(function () {
 
 describe("Screen displaying digits", function () {
      var runs = [
-          { it: "0", option: "0" },
           { it: "1", option: "1" },
           { it: "2", option: "2" },
           { it: "3", option: "3" },
@@ -56,7 +55,18 @@ describe("Screen displaying digits", function () {
           );
      });
 
-     it("display 01 when clicking consecutively on the digits 0 and 1", function () {
+     it("does nothing when clicking on 0 while only 0 is displayed", function () {
+          // arrange
+          let digit = document.getElementById("0");
+
+          // act
+          multipleClicks(digit, 2);
+
+          // assert
+          expect(display.value).to.equal("");
+     });
+
+     it("display 1 when clicking consecutively on the digits 0 and 1", function () {
           // arrange
           let digit0 = document.getElementById("0");
           let digit1 = document.getElementById("1");
@@ -66,7 +76,20 @@ describe("Screen displaying digits", function () {
           digit1.click();
 
           // assert
-          expect(display.value).to.equal("01");
+          expect(display.value).to.equal("1");
+     });
+
+     it("display 10 when clicking consecutively on the digits 1 and 0", function () {
+          // arrange
+          let digit0 = document.getElementById("0");
+          let digit1 = document.getElementById("1");
+
+          // act
+          digit1.click();
+          digit0.click();
+
+          // assert
+          expect(display.value).to.equal("10");
      });
 
      it("display 99 when clicking two times on the digit 9", function () {
@@ -195,6 +218,102 @@ describe("Negate operation", () => {
 
           // assert
           expect(display.value).to.equal("-1");
+     });
+
+     it("-1 turns 1 when clicking on negate button", () => {
+          // arrange
+          let negate = document.querySelector(".row .negative");
+          display.value = "-1";
+
+          // act
+          negate.click();
+
+          // assert
+          expect(display.value).to.equal("1");
+     });
+
+     it("2 stays 2 when clicking 2 times on negate button", () => {
+          // arrange
+          let negate = document.querySelector(".row .negative");
+          let digit1 = document.getElementById("1");
+
+          // act
+          digit1.click();
+          negate.click();
+          negate.click();
+
+          // assert
+          expect(display.value).to.equal("1");
+     });
+
+     it("-10 000 turns 10 000 when clicking on negate button", () => {
+          // arrange
+          let negate = document.querySelector(".row .negative");
+          display.value = "-10 000";
+
+          // act
+          negate.click();
+
+          // assert
+          expect(display.value).to.equal("10 000");
+     });
+
+     it("10 000 turns 10 000 when clicking 2 times on negate button", () => {
+          // arrange
+          let negate = document.querySelector(".row .negative");
+          let digit0 = document.getElementById("0");
+          let digit1 = document.getElementById("1");
+
+          // act
+          digit1.click();
+          multipleClicks(digit0, 4);
+          negate.click();
+          negate.click();
+
+          // assert
+          expect(display.value).to.equal("10 000");
+     });
+});
+
+describe("Delete operation", () => {
+     it("1 disappears when clicking on backspace", () => {
+          // arrange
+          let backspace = document.getElementById("backspace");
+          let digit = document.getElementById("1");
+
+          // act
+          digit.click();
+          backspace.click();
+
+          // assert
+          expect(display.value).to.equal("");
+     });
+
+     it("11 becomes 1 when clicking on backspace", () => {
+          // arrange
+          let backspace = document.getElementById("backspace");
+          let digit = document.getElementById("1");
+
+          // act
+          digit.click();
+          digit.click();
+          backspace.click();
+
+          // assert
+          expect(display.value).to.equal("1");
+     });
+
+     it("1 111 becomes 111 when clicking on backspace", () => {
+          // arrange
+          let backspace = document.getElementById("backspace");
+          let digit = document.getElementById("1");
+
+          // act
+          multipleClicks(digit, 4);
+          backspace.click();
+
+          // assert
+          expect(display.value).to.equal("111");
      });
 });
 
