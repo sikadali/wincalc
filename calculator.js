@@ -31,11 +31,8 @@ arr.forEach((button) => {
           } else if (innerHTML == CLEAR) {
                input.value = EMPTY_CHAR;
           } else if (e.target.className == "operator bi bi-backspace") {
-               if (input.value.length > 1) {
-                    input.value = removeLastChar(input.value);
-               } else if (input.value.length == 1) {
-                    input.value = "";
-               }
+               deleteNumberInput();
+               spacingInputValue();
           } else if (innerHTML == ZERO && input.value == "") {
           } else {
                input.value += innerHTML;
@@ -43,6 +40,14 @@ arr.forEach((button) => {
           }
      });
 });
+
+function deleteNumberInput() {
+     if (input.value.length > 1) {
+          input.value = removeLastChar(input.value);
+     } else if (input.value.length == 1) {
+          input.value = "";
+     }
+}
 
 function inputValueIsNegative() {
      return input.value.startsWith(NEGATIVE);

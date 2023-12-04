@@ -315,6 +315,19 @@ describe("Delete operation", () => {
           // assert
           expect(display.value).to.equal("111");
      });
+
+     it("11 111 111 becomes 1 111 111 when clicking on backspace", () => {
+          // arrange
+          let backspace = document.getElementById("backspace");
+          let digit = document.getElementById("1");
+
+          // act
+          multipleClicks(digit, 8);
+          backspace.click();
+
+          // assert
+          expect(display.value).to.equal("1 111 111");
+     });
 });
 
 function waitForDom() {
