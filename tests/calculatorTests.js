@@ -161,16 +161,42 @@ describe("Space for big numbers", function () {
      }
 });
 
-/*describe("Negate operation", () => {
-     it("displayed positive number turns negative when clicking on negate button", () => {
+describe("Negate operation", () => {
+     it("does nothing when clicking on negate button while no number inputed", () => {
           // arrange
           let negate = document.getElementById("negative");
 
           // act
+          negate.click();
 
           // assert
+          expect(display.value).to.equal("");
      });
-});*/
+
+     it("does nothing when clicking on negate button while 0 in input", () => {
+          // arrange
+          let negate = document.getElementById("negative");
+
+          // act
+          negate.click();
+
+          // assert
+          expect(display.value).to.equal("");
+     });
+
+     it("1 turns -1 when clicking on negate button", () => {
+          // arrange
+          let negate = document.getElementById("negative");
+          let digit1 = document.getElementById("1");
+
+          // act
+          digit1.click();
+          negate.click();
+
+          // assert
+          expect(display.value).to.equal("-1");
+     });
+});
 
 function waitForDom() {
      return new Promise((resolve) => {
