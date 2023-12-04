@@ -136,6 +136,29 @@ describe("Space for big numbers", function () {
           // assert
           expect(display.value).to.equal("9 999 999 999 999 999");
      });
+
+     it("display 1 230 123 012 301 230 when inputing the number 1230123012301230", function () {
+          // arrange
+          let digit0 = document.getElementById("0");
+          let digit1 = document.getElementById("1");
+          let digit2 = document.getElementById("2");
+          let digit3 = document.getElementById("3");
+
+          // act
+          for (let i = 0; i < 4; i++) {
+               click1230(digit1, digit2, digit3, digit0);
+          }
+
+          // assert
+          expect(display.value).to.equal("1 230 123 012 301 230");
+     });
+
+     function click1230(digit1, digit2, digit3, digit0) {
+          digit1.click();
+          digit2.click();
+          digit3.click();
+          digit0.click();
+     }
 });
 
 /*describe("Negate operation", () => {
