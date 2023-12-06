@@ -344,15 +344,33 @@ describe("Sum operation", () => {
           expect(display.value).to.equal("1");
      });
 
-     it("1+2 = 3", () => {
+     it("display 2 when clicking on 1, + then 2", () => {
           // arrange
           let sum = document.getElementById("sum");
-          let digit = document.getElementById("1");
+          let digit1 = document.getElementById("1");
+          let digit2 = document.getElementById("2");
 
           // act
-          digit.click();
+          digit1.click();
           sum.click();
-          digit.click();
+          digit2.click();
+
+          // assert
+          expect(display.value).to.equal("2");
+     });
+
+     it(" click on 1, +, 2, then = leads to 3", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit1 = document.getElementById("1");
+          let digit2 = document.getElementById("2");
+          let equal = document.getElementById("=");
+
+          // act
+          digit1.click();
+          sum.click();
+          digit2.click();
+          equal.click();
 
           // assert
           expect(display.value).to.equal("2");

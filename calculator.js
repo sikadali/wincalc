@@ -1,5 +1,6 @@
 let input = document.getElementById("display");
 let buttons = document.querySelectorAll("button");
+let arr = Array.from(buttons);
 
 const SPACE_REGEX = / /g;
 const SPACE_CHAR = " ";
@@ -12,13 +13,12 @@ const NEGATIVE = "-";
 const PLUS = "+";
 const ZERO = "0";
 
-let arr = Array.from(buttons);
-
 arr.forEach((button) => {
      button.addEventListener("click", (e) => {
           const innerHTML = e.target.innerHTML;
           if (innerHTML == EQUAL) {
-               input.value = eval(removeSpaceChar(input.value));
+               compute.secondEntry = transformToFloat(input.value);
+               input.value = compute.operation();
           } else if (e.target.className == NEGATIVE_CLASS) {
                if (
                     input.value != "0" &&
@@ -36,6 +36,8 @@ arr.forEach((button) => {
                spacingInputValue();
           } else if (innerHTML == ZERO && input.value == "") {
           } else if (innerHTML == PLUS) {
+               compute.operator = operators.SUM;
+               compute.firstEntry = transformToFloat(input.value);
           } else {
                input.value += innerHTML;
                spacingInputValue();
@@ -82,26 +84,25 @@ function removeLastChar(str) {
      return str.substring(0, str.length - 1);
 }
 
-const functionX = { NEGATIVE: "negative" };
-const functionXY = { SUM: "sum" };
+function transformToFloat() {
+     return parseFloat(removeSpaceCharFromInput());
+}
 
+const operators = {
+     SUM: "+",
+};
 class Compute {
-     constructor(firstEntry, secondEntry, functionXY, functionX) {
+     constructor(firstEntry, secondEntry, operator) {
           this.firstEntry = firstEntry;
           this.secondEntry = secondEntry;
-          this.functionXY = functionXY;
-          this.functionX = functionX;
+          this.operator = operator;
      }
 
-     setFirstEntry(entry) {
-          this.firstEntry = entry;
-     }
-
-     setSecondEntry(entry) {
-          this.secondEntry = entry;
-     }
-
-     sum() {
-          return this.firstEntry + this.secondEntry;
+     operation() {
+          if (this.operator == operators.SUM) {
+               return this.firstEntry + this.secondEntry;
+          }
+          return 0;
      }
 }
+let compute = new Compute();
