@@ -330,6 +330,35 @@ describe("Delete operation", () => {
      });
 });
 
+describe("Sum operation", () => {
+     it("display 1 when clicking on 1 then +", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit = document.getElementById("1");
+
+          // act
+          digit.click();
+          sum.click();
+
+          // assert
+          expect(display.value).to.equal("1");
+     });
+
+     it("1+2 = 3", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit = document.getElementById("1");
+
+          // act
+          digit.click();
+          sum.click();
+          digit.click();
+
+          // assert
+          expect(display.value).to.equal("2");
+     });
+});
+
 function waitForDom() {
      return new Promise((resolve) => {
           dom = new JSDOM(html, {

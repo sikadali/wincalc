@@ -9,6 +9,7 @@ const CLEAR = "C";
 const CLEAR_ENTRY = "CE";
 const NEGATIVE_CLASS = "negative";
 const NEGATIVE = "-";
+const PLUS = "+";
 const ZERO = "0";
 
 let arr = Array.from(buttons);
@@ -34,6 +35,7 @@ arr.forEach((button) => {
                deleteNumberInput();
                spacingInputValue();
           } else if (innerHTML == ZERO && input.value == "") {
+          } else if (innerHTML == PLUS) {
           } else {
                input.value += innerHTML;
                spacingInputValue();
@@ -78,4 +80,28 @@ function removeFirstChar(str) {
 
 function removeLastChar(str) {
      return str.substring(0, str.length - 1);
+}
+
+const functionX = { NEGATIVE: "negative" };
+const functionXY = { SUM: "sum" };
+
+class Compute {
+     constructor(firstEntry, secondEntry, functionXY, functionX) {
+          this.firstEntry = firstEntry;
+          this.secondEntry = secondEntry;
+          this.functionXY = functionXY;
+          this.functionX = functionX;
+     }
+
+     setFirstEntry(entry) {
+          this.firstEntry = entry;
+     }
+
+     setSecondEntry(entry) {
+          this.secondEntry = entry;
+     }
+
+     sum() {
+          return this.firstEntry + this.secondEntry;
+     }
 }
