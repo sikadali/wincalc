@@ -341,7 +341,7 @@ describe("Sum operation", () => {
           sum.click();
 
           // assert
-          expect(display.value).to.equal("1");
+          expect(display.placeholder).to.equal("1");
      });
 
      it("display 2 when clicking on 1, + then 2", () => {
@@ -359,7 +359,7 @@ describe("Sum operation", () => {
           expect(display.value).to.equal("2");
      });
 
-     it(" click on 1, +, 2, then = leads to 3", () => {
+     it("click on 1, +, 2, then = leads to 3", () => {
           // arrange
           let sum = document.getElementById("sum");
           let digit1 = document.getElementById("1");
@@ -373,7 +373,27 @@ describe("Sum operation", () => {
           equal.click();
 
           // assert
-          expect(display.value).to.equal("2");
+          expect(display.placeholder).to.equal("3");
+     });
+
+     it("click on 1, +, 2, +, 3 leads to 6", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit1 = document.getElementById("1");
+          let digit2 = document.getElementById("2");
+          let digit3 = document.getElementById("3");
+          let equal = document.getElementById("=");
+
+          // act
+          digit1.click();
+          sum.click();
+          digit2.click();
+          sum.click();
+          digit3.click();
+          equal.click();
+
+          // assert
+          expect(display.placeholder).to.equal("6");
      });
 });
 

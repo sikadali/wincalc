@@ -19,6 +19,7 @@ arr.forEach((button) => {
           if (innerHTML == EQUAL) {
                compute.secondEntry = transformToFloat(input.value);
                input.value = compute.operation();
+               freeDisplay(input.value);
           } else if (e.target.className == NEGATIVE_CLASS) {
                if (
                     input.value != "0" &&
@@ -38,6 +39,7 @@ arr.forEach((button) => {
           } else if (innerHTML == PLUS) {
                compute.operator = operators.SUM;
                compute.firstEntry = transformToFloat(input.value);
+               freeDisplay(compute.firstEntry);
           } else {
                input.value += innerHTML;
                spacingInputValue();
@@ -88,6 +90,11 @@ function transformToFloat() {
      return parseFloat(removeSpaceCharFromInput());
 }
 
+function freeDisplay(value) {
+     input.value = "";
+     input.placeholder = value;
+}
+
 const operators = {
      SUM: "+",
 };
@@ -105,4 +112,5 @@ class Compute {
           return 0;
      }
 }
+
 let compute = new Compute();
