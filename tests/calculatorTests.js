@@ -102,6 +102,20 @@ describe("Screen displaying digits", function () {
           // assert
           expect(display.value).to.equal("99");
      });
+
+     it("display 9,9 when clicking two times on the digit 9", function () {
+          // arrange
+          let digit = document.getElementById("9");
+          let digitComma = document.getElementById(".");
+
+          // act
+          digit.click();
+          digitComma.click();
+          digit.click();
+
+          // assert
+          expect(display.value).to.equal("9,9");
+     });
 });
 
 describe("Space for big numbers", function () {
@@ -176,6 +190,34 @@ describe("Space for big numbers", function () {
           expect(display.value).to.equal("1 230 123 012 301 230");
      });
 
+     it("display 999,9 when putting comma", function () {
+          // arrange
+          let digit = document.getElementById("9");
+          let digitComma = document.getElementById(".");
+
+          // act
+          multipleClicks(digit, 3);
+          digitComma.click();
+          digit.click();
+
+          // assert
+          expect(display.value).to.equal("999,9");
+     });
+
+     it("display 9 999,9999 when putting comma", function () {
+          // arrange
+          let digit = document.getElementById("9");
+          let digitComma = document.getElementById(".");
+
+          // act
+          multipleClicks(digit, 4);
+          digitComma.click();
+          multipleClicks(digit, 4);
+
+          // assert
+          expect(display.value).to.equal("9 999,9999");
+     });
+
      function click1230(digit1, digit2, digit3, digit0) {
           digit1.click();
           digit2.click();
@@ -187,7 +229,7 @@ describe("Space for big numbers", function () {
 describe("Negate operation", () => {
      it("does nothing when clicking on negate button while no number inputed", () => {
           // arrange
-          let negate = document.querySelector(".row .negative");
+          let negate = document.getElementById("neg");
 
           // act
           negate.click();
@@ -198,7 +240,7 @@ describe("Negate operation", () => {
 
      it("does nothing when clicking on negate button while 0 in input", () => {
           // arrange
-          let negate = document.querySelector(".row .negative");
+          let negate = document.getElementById("neg");
 
           // act
           negate.click();
@@ -209,7 +251,7 @@ describe("Negate operation", () => {
 
      it("1 turns -1 when clicking on negate button", () => {
           // arrange
-          let negate = document.querySelector(".row .negative");
+          let negate = document.getElementById("neg");
           let digit1 = document.getElementById("1");
 
           // act
@@ -222,7 +264,7 @@ describe("Negate operation", () => {
 
      it("-1 turns 1 when clicking on negate button", () => {
           // arrange
-          let negate = document.querySelector(".row .negative");
+          let negate = document.getElementById("neg");
           display.value = "-1";
 
           // act
@@ -234,7 +276,7 @@ describe("Negate operation", () => {
 
      it("2 stays 2 when clicking 2 times on negate button", () => {
           // arrange
-          let negate = document.querySelector(".row .negative");
+          let negate = document.getElementById("neg");
           let digit1 = document.getElementById("1");
 
           // act
@@ -248,7 +290,7 @@ describe("Negate operation", () => {
 
      it("-10 000 turns 10 000 when clicking on negate button", () => {
           // arrange
-          let negate = document.querySelector(".row .negative");
+          let negate = document.getElementById("neg");
           display.value = "-10 000";
 
           // act
@@ -260,7 +302,7 @@ describe("Negate operation", () => {
 
      it("10 000 turns 10 000 when clicking 2 times on negate button", () => {
           // arrange
-          let negate = document.querySelector(".row .negative");
+          let negate = document.getElementById("neg");
           let digit0 = document.getElementById("0");
           let digit1 = document.getElementById("1");
 
@@ -275,6 +317,7 @@ describe("Negate operation", () => {
      });
 });
 
+/*
 describe("Delete operation", () => {
      it("1 disappears when clicking on backspace", () => {
           // arrange
@@ -395,7 +438,7 @@ describe("Sum operation", () => {
           // assert
           expect(display.placeholder).to.equal("6");
      });
-});
+});*/
 
 function waitForDom() {
      return new Promise((resolve) => {

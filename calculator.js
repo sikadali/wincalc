@@ -8,11 +8,45 @@ const EMPTY_CHAR = "";
 const EQUAL = "=";
 const CLEAR = "C";
 const CLEAR_ENTRY = "CE";
-const NEGATIVE_CLASS = "negative";
+const NEG_INNER = "+/-";
 const NEGATIVE = "-";
 const PLUS = "+";
 const ZERO = "0";
+const COMMA_DISPLAY = ",";
 
+let digitButtons = Array.from(document.querySelectorAll(".row .digit"));
+digitButtons.forEach((button) => {
+     button.addEventListener("click", (e) => {
+          const innerHTML = e.target.innerHTML;
+          if (innerHTML == ZERO && input.value == "") {
+          } else if (innerHTML == COMMA_DISPLAY) {
+               input.value += innerHTML;
+          } else {
+               input.value += innerHTML;
+               spacingInputValue();
+          }
+     });
+});
+
+let operationButtons = Array.from(document.querySelectorAll(".row .operator"));
+operationButtons.forEach((button) => {
+     button.addEventListener("click", (e) => {
+          const innerHTML = e.target.innerHTML;
+          if (innerHTML == NEG_INNER) {
+               if (
+                    input.value != "0" &&
+                    input.value != "" &&
+                    !inputValueIsNegative()
+               ) {
+                    input.value = NEGATIVE + input.value;
+               } else if (inputValueIsNegative()) {
+                    input.value = removeFirstChar(input.value);
+               }
+          }
+     });
+});
+
+/*
 arr.forEach((button) => {
      button.addEventListener("click", (e) => {
           const innerHTML = e.target.innerHTML;
@@ -45,7 +79,30 @@ arr.forEach((button) => {
                spacingInputValue();
           }
      });
-});
+});*/
+
+function spacingInputValue() {
+     const parts = removeSpaceChar(input.value).split(COMMA_DISPLAY);
+     const integerPart = parts[0];
+     const fractionalPart = parts[1];
+
+     const arrayStrings = removeSpaceChar(integerPart).split("");
+     const reversingArray = arrayStrings.reverse();
+
+     let result = "";
+     for (let i = 0; i < reversingArray.length; i++) {
+          result = reversingArray[i] + result;
+          if ((i + 1) % 3 == 0 && i != reversingArray.length - 1) {
+               result = SPACE_CHAR + result;
+          }
+     }
+
+     if (fractionalPart) {
+          input.value = result + COMMA_DISPLAY + fractionalPart;
+     } else {
+          input.value = result;
+     }
+}
 
 function deleteNumberInput() {
      if (input.value.length > 1) {
@@ -59,23 +116,8 @@ function inputValueIsNegative() {
      return input.value.startsWith(NEGATIVE);
 }
 
-function spacingInputValue() {
-     const arrayStrings = removeSpaceCharFromInput().split("");
-     const reversingArray = arrayStrings.reverse();
-
-     let result = "";
-     for (let i = 0; i < reversingArray.length; i++) {
-          result = reversingArray[i] + result;
-          if ((i + 1) % 3 == 0 && i != reversingArray.length - 1) {
-               result = SPACE_CHAR + result;
-          }
-     }
-
-     input.value = result;
-}
-
-function removeSpaceCharFromInput() {
-     return input.value.replace(SPACE_REGEX, "");
+function removeSpaceChar(str) {
+     return str.replace(SPACE_REGEX, "");
 }
 
 function removeFirstChar(str) {
@@ -87,7 +129,7 @@ function removeLastChar(str) {
 }
 
 function transformToFloat() {
-     return parseFloat(removeSpaceCharFromInput());
+     return parseFloat(removeSpaceChar(input.value));
 }
 
 function freeDisplay(value) {
