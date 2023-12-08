@@ -323,11 +323,10 @@ describe("Delete operation", () => {
           let backspace = document.getElementById("backspace");
           let digit = document.getElementById("1");
 
-          // act
+          // act & assert
           digit.click();
+          expect(display.value).to.equal("1");
           backspace.click();
-
-          // assert
           expect(display.value).to.equal("");
      });
 
@@ -373,6 +372,7 @@ describe("Delete operation", () => {
 });
 
 describe("Sum operation", () => {
+     beforeEach((done) => waitDom(done));
      it("display 1 when clicking on 1 then +", () => {
           // arrange
           let sum = document.getElementById("sum");
@@ -441,14 +441,25 @@ describe("Sum operation", () => {
 
 function waitForDom() {
      return new Promise((resolve) => {
-          dom = new JSDOM(html, {
-               runScripts: "dangerously",
-               resources: "usable",
-               url: `file://${path.resolve(__dirname, "..")}/index.html`,
-          });
+          dom = getJsdom();
           dom.window.document.addEventListener("DOMContentLoaded", () => {
                resolve();
           });
+     });
+}
+
+function waitDom(done) {
+     dom = getJsdom();
+     dom.window.document.addEventListener("DOMContentLoaded", () => {
+          done();
+     });
+}
+
+function getJsdom() {
+     return new JSDOM(html, {
+          runScripts: "dangerously",
+          resources: "usable",
+          url: `file://${path.resolve(__dirname, "..")}/index.html`,
      });
 }
 

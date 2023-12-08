@@ -81,7 +81,7 @@ input.small {
     font-weight: lighter;
 }
 
-.calculator .operator {
+.calculator .darker {
     background: var(--color-calc-btn-bg-darker);
 }
 .calculator .equal {
@@ -92,7 +92,7 @@ input.small {
 .calculator button:hover {
     background: var(--color-calc-btn-bg-darker);
 }
-.calculator .operator:hover {
+.calculator .darker:hover {
     background: var(--color-calc-btn-bg);
 }
 .calculator .equal:hover {

@@ -56,7 +56,7 @@ functionButtons.forEach((button) => {
           const innerHTML = e.target.innerHTML;
           if (innerHTML == PLUS) {
                compute.operator = operators.SUM;
-               compute.firstEntry = transformToFloat(input.value);
+               compute.firstEntry += transformToFloat(input.value);
                freeDisplay(compute.firstEntry);
           }
      });
@@ -68,41 +68,6 @@ equalButton.addEventListener("click", () => {
      input.value = compute.operation();
      freeDisplay(input.value);
 });
-
-/*
-arr.forEach((button) => {
-     button.addEventListener("click", (e) => {
-          const innerHTML = e.target.innerHTML;
-          if (innerHTML == EQUAL) {
-               compute.secondEntry = transformToFloat(input.value);
-               input.value = compute.operation();
-               freeDisplay(input.value);
-          } else if (e.target.className == NEGATIVE_CLASS) {
-               if (
-                    input.value != "0" &&
-                    input.value != "" &&
-                    !inputValueIsNegative()
-               ) {
-                    input.value = NEGATIVE + input.value;
-               } else if (inputValueIsNegative()) {
-                    input.value = removeFirstChar(input.value);
-               }
-          } else if (innerHTML == CLEAR) {
-               input.value = EMPTY_CHAR;
-          } else if (e.target.className == "operator bi bi-backspace") {
-               deleteNumberInput();
-               spacingInputValue();
-          } else if (innerHTML == ZERO && input.value == "") {
-          } else if (innerHTML == PLUS) {
-               compute.operator = operators.SUM;
-               compute.firstEntry = transformToFloat(input.value);
-               freeDisplay(compute.firstEntry);
-          } else {
-               input.value += innerHTML;
-               spacingInputValue();
-          }
-     });
-});*/
 
 function spacingInputValue() {
      const parts = removeSpaceChar(input.value).split(COMMA_DISPLAY);
@@ -178,4 +143,4 @@ class Compute {
      }
 }
 
-let compute = new Compute();
+let compute = new Compute(0, 0, undefined);
