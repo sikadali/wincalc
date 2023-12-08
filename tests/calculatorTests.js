@@ -317,7 +317,6 @@ describe("Negate operation", () => {
      });
 });
 
-/*
 describe("Delete operation", () => {
      it("1 disappears when clicking on backspace", () => {
           // arrange
@@ -373,6 +372,7 @@ describe("Delete operation", () => {
      });
 });
 
+/*
 describe("Sum operation", () => {
      it("display 1 when clicking on 1 then +", () => {
           // arrange

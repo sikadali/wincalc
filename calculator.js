@@ -8,7 +8,8 @@ const EMPTY_CHAR = "";
 const EQUAL = "=";
 const CLEAR = "C";
 const CLEAR_ENTRY = "CE";
-const NEG_INNER = "+/-";
+const BACKSPACE = "backspace";
+const NEG_ID = "neg";
 const NEGATIVE = "-";
 const PLUS = "+";
 const ZERO = "0";
@@ -31,8 +32,8 @@ digitButtons.forEach((button) => {
 let operationButtons = Array.from(document.querySelectorAll(".row .operator"));
 operationButtons.forEach((button) => {
      button.addEventListener("click", (e) => {
-          const innerHTML = e.target.innerHTML;
-          if (innerHTML == NEG_INNER) {
+          const id = e.target.id;
+          if (id == NEG_ID) {
                if (
                     input.value != "0" &&
                     input.value != "" &&
@@ -42,6 +43,9 @@ operationButtons.forEach((button) => {
                } else if (inputValueIsNegative()) {
                     input.value = removeFirstChar(input.value);
                }
+          } else if (id == BACKSPACE) {
+               input.value = removeLastChar(input.value);
+               spacingInputValue();
           }
      });
 });
