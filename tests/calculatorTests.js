@@ -372,7 +372,6 @@ describe("Delete operation", () => {
      });
 });
 
-/*
 describe("Sum operation", () => {
      it("display 1 when clicking on 1 then +", () => {
           // arrange
@@ -438,7 +437,7 @@ describe("Sum operation", () => {
           // assert
           expect(display.placeholder).to.equal("6");
      });
-});*/
+});
 
 function waitForDom() {
      return new Promise((resolve) => {

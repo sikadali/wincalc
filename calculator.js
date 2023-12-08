@@ -50,6 +50,25 @@ operationButtons.forEach((button) => {
      });
 });
 
+let functionButtons = Array.from(document.querySelectorAll(".row .function"));
+functionButtons.forEach((button) => {
+     button.addEventListener("click", (e) => {
+          const innerHTML = e.target.innerHTML;
+          if (innerHTML == PLUS) {
+               compute.operator = operators.SUM;
+               compute.firstEntry = transformToFloat(input.value);
+               freeDisplay(compute.firstEntry);
+          }
+     });
+});
+
+let equalButton = document.getElementById("=");
+equalButton.addEventListener("click", () => {
+     compute.secondEntry = transformToFloat(input.value);
+     input.value = compute.operation();
+     freeDisplay(input.value);
+});
+
 /*
 arr.forEach((button) => {
      button.addEventListener("click", (e) => {
