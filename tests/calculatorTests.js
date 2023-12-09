@@ -473,6 +473,38 @@ describe("Sum operation", () => {
           equal.click();
           expect(display.placeholder).to.equal("7");
      });
+
+     it("click on 1, +, then = leads to 2", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit = document.getElementById("1");
+          let equal = document.getElementById("=");
+
+          // act
+          digit.click();
+          sum.click();
+          equal.click();
+
+          // assert
+          expect(display.placeholder).to.equal("2");
+     });
+
+     it("click on 1, +, then = leads to 2, then = leads to 3, then 4", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit = document.getElementById("1");
+          let equal = document.getElementById("=");
+
+          // act & assert
+          digit.click();
+          sum.click();
+          equal.click();
+          expect(display.placeholder).to.equal("2");
+          equal.click();
+          expect(display.placeholder).to.equal("3");
+          equal.click();
+          expect(display.placeholder).to.equal("4");
+     });
 });
 
 describe("Subtraction operation", () => {});

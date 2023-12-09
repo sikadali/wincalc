@@ -64,10 +64,15 @@ functionButtons.forEach((button) => {
 
 let equalButton = document.getElementById("=");
 equalButton.addEventListener("click", () => {
-     if (input.value == "") {
+     if (input.value != "") {
+          compute.secondEntry = transformToFloat(input.value);
+          isSecondEntryFilled = true;
+          computeOperation();
+     } else if (!isSecondEntryFilled) {
+          compute.secondEntry = transformToFloat(input.placeholder);
+          isSecondEntryFilled = true;
           computeOperation();
      } else {
-          compute.secondEntry = transformToFloat(input.value);
           computeOperation();
      }
 });
@@ -124,8 +129,8 @@ function removeLastChar(str) {
      return str.substring(0, str.length - 1);
 }
 
-function transformToFloat() {
-     return parseFloat(removeSpaceChar(input.value));
+function transformToFloat(str) {
+     return parseFloat(removeSpaceChar(str));
 }
 
 function freeDisplay(value) {
@@ -152,3 +157,4 @@ class Compute {
 }
 
 let compute = new Compute(0, 0);
+let isSecondEntryFilled = false;
