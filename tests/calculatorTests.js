@@ -418,6 +418,23 @@ describe("Sum operation", () => {
           expect(display.placeholder).to.equal("3");
      });
 
+     it("click on 1, +, 2, and + leads to 3", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit1 = document.getElementById("1");
+          let digit2 = document.getElementById("2");
+          let equal = document.getElementById("=");
+
+          // act
+          digit1.click();
+          sum.click();
+          digit2.click();
+          equal.click();
+
+          // assert
+          expect(display.placeholder).to.equal("3");
+     });
+
      it("click on 1, +, 2, +, 3 leads to 6", () => {
           // arrange
           let sum = document.getElementById("sum");
@@ -437,7 +454,28 @@ describe("Sum operation", () => {
           // assert
           expect(display.placeholder).to.equal("6");
      });
+
+     it("click on 1, +, 2, then = leads to 3, and another = leads to 5, and another one to 7", () => {
+          // arrange
+          let sum = document.getElementById("sum");
+          let digit1 = document.getElementById("1");
+          let digit2 = document.getElementById("2");
+          let equal = document.getElementById("=");
+
+          // act & assert
+          digit1.click();
+          sum.click();
+          digit2.click();
+          equal.click();
+          expect(display.placeholder).to.equal("3");
+          equal.click();
+          expect(display.placeholder).to.equal("5");
+          equal.click();
+          expect(display.placeholder).to.equal("7");
+     });
 });
+
+describe("Subtraction operation", () => {});
 
 function waitForDom() {
      return new Promise((resolve) => {

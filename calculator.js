@@ -64,10 +64,18 @@ functionButtons.forEach((button) => {
 
 let equalButton = document.getElementById("=");
 equalButton.addEventListener("click", () => {
-     compute.secondEntry = transformToFloat(input.value);
-     input.value = compute.operation();
-     freeDisplay(input.value);
+     if (input.value == "") {
+          computeOperation();
+     } else {
+          compute.secondEntry = transformToFloat(input.value);
+          computeOperation();
+     }
 });
+
+function computeOperation() {
+     compute.firstEntry = compute.operation();
+     freeDisplay(compute.firstEntry);
+}
 
 function spacingInputValue() {
      const parts = removeSpaceChar(input.value).split(COMMA_DISPLAY);
@@ -143,4 +151,4 @@ class Compute {
      }
 }
 
-let compute = new Compute(0, 0, undefined);
+let compute = new Compute(0, 0);
