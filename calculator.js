@@ -12,6 +12,7 @@ const BACKSPACE = "backspace";
 const NEG_ID = "neg";
 const NEGATIVE = "-";
 const PLUS = "+";
+const MINUS = "-";
 const ZERO = "0";
 const COMMA_DISPLAY = ",";
 
@@ -34,11 +35,7 @@ operationButtons.forEach((button) => {
      button.addEventListener("click", (e) => {
           const id = e.target.id;
           if (id == NEG_ID) {
-               if (
-                    input.value != "0" &&
-                    input.value != "" &&
-                    !inputValueIsNegative()
-               ) {
+               if (input.value != "0" && input.value != "" && !inputValueIsNegative()) {
                     input.value = NEGATIVE + input.value;
                } else if (inputValueIsNegative()) {
                     input.value = removeFirstChar(input.value);
@@ -57,6 +54,10 @@ functionButtons.forEach((button) => {
           if (innerHTML == PLUS) {
                compute.operator = operators.SUM;
                compute.firstEntry += transformToFloat(input.value);
+               freeDisplay(compute.firstEntry);
+          } else if (innerHTML == MINUS) {
+               compute.operator = operators.SUBSTRACTION;
+               compute.firstEntry = transformToFloat(input.value) - compute.firstEntry;
                freeDisplay(compute.firstEntry);
           }
      });
@@ -140,6 +141,7 @@ function freeDisplay(value) {
 
 const operators = {
      SUM: "+",
+     SUBSTRACTION: "-",
 };
 class Compute {
      constructor(firstEntry, secondEntry, operator) {
@@ -151,6 +153,9 @@ class Compute {
      operation() {
           if (this.operator == operators.SUM) {
                return this.firstEntry + this.secondEntry;
+          }
+          if (this.operator == operators.SUBSTRACTION) {
+               return this.firstEntry - this.secondEntry;
           }
           return 0;
      }

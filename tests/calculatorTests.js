@@ -423,13 +423,12 @@ describe("Sum operation", () => {
           let sum = document.getElementById("sum");
           let digit1 = document.getElementById("1");
           let digit2 = document.getElementById("2");
-          let equal = document.getElementById("=");
 
           // act
           digit1.click();
           sum.click();
           digit2.click();
-          equal.click();
+          sum.click();
 
           // assert
           expect(display.placeholder).to.equal("3");
@@ -507,7 +506,69 @@ describe("Sum operation", () => {
      });
 });
 
-describe("Subtraction operation", () => {});
+describe("Subtraction operation", () => {
+     beforeEach((done) => waitDom(done));
+     it("display 1 when clicking on 1 then -", () => {
+          // arrange
+          let substract = document.getElementById("substract");
+          let digit = document.getElementById("1");
+
+          // act
+          digit.click();
+          substract.click();
+
+          // assert
+          expect(display.placeholder).to.equal("1");
+     });
+
+     it("display 2 when clicking on 5, -, then 2", () => {
+          // arrange
+          let substract = document.getElementById("substract");
+          let digit5 = document.getElementById("5");
+          let digit2 = document.getElementById("2");
+
+          // act
+          digit5.click();
+          substract.click();
+          digit2.click();
+
+          // assert
+          expect(display.value).to.equal("2");
+     });
+
+     it("click on 5, -, 2, then = leads to 3", () => {
+          // arrange
+          let substract = document.getElementById("substract");
+          let digit5 = document.getElementById("5");
+          let digit2 = document.getElementById("2");
+          let equal = document.getElementById("=");
+
+          // act
+          digit5.click();
+          substract.click();
+          digit2.click();
+          equal.click();
+
+          // assert
+          expect(display.placeholder).to.equal("3");
+     });
+
+     it("click on 5, -, 2, and - leads to 3", () => {
+          // arrange
+          let substract = document.getElementById("substract");
+          let digit5 = document.getElementById("5");
+          let digit2 = document.getElementById("2");
+
+          // act
+          digit5.click();
+          substract.click();
+          digit2.click();
+          substract.click();
+
+          // assert
+          expect(display.placeholder).to.equal("3");
+     });
+});
 
 function waitForDom() {
      return new Promise((resolve) => {
